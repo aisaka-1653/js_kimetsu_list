@@ -3,6 +3,10 @@
   width: 1200px;
 }
 
+.radio-label {
+  margin-inline-end: 1rem;
+}
+
 .character-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -8,8 +8,27 @@
 </head>
 <body>
   <div class="container">
-    <ul class="character-list">
-    </ul>
+    <h1>鬼滅の刃 キャラクター一覧</h1>
+    <form>
+      <fieldset>
+        <legend>ソート</legend>
+    
+        <input type="radio" id="all" class="radio" name="character" value="all" checked="true"/>
+        <label for="all" class="radio-label">全て</label>
+    
+        <input type="radio" id="hashira" class="radio" name="character" value="hashira"/>
+        <label for="hashira" class="radio-label">柱</label>
+    
+        <input type="radio" id="oni" class="radio" name="character" value="oni"/>
+        <label for="oni" class="radio-label">鬼</label>
+
+        <input type="radio" id="kisatsutai" class="radio" name="character" value="kisatsutai"/>
+        <label for="kisatsutai" class="radio-label">鬼殺隊</label>
+      </fieldset>
+    </form>
+    <div id="content">
+      <p>loading...</p>
+    </div>
   </div>
   <script src="./index.js"></script>
 </body>
