@@ -47,13 +47,8 @@ const render = (element) => {
 
 const showCharacter = (characters) => {
   const characterList = document.createElement('ul');
-
   characterList.className = 'character-list';
-  const liElements = characters.map(createCharacterElement);
-
-  for (let li of liElements) {
-    characterList.appendChild(li);
-  }
+  characterList.append(...characters.map(createCharacterElement));
   render(characterList);
 };
 
