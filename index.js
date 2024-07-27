@@ -3,19 +3,19 @@
 const GITHUB_BASE_URL = 'https://ihatov08.github.io/';
 const API_BASE_URL = 'https://ihatov08.github.io/kimetsu_api/api/';
 
-function createLoadingElement() {
+const createLoadingElement = () => {
   const loadingElement = document.createElement('p')
   loadingElement.textContent = 'loading...';
   return loadingElement;
-}
+};
 
-async function fetchKimetsuData(endpoint) {
+const fetchKimetsuData = async (endpoint) => {
   render(createLoadingElement());
   const response = await fetch(API_BASE_URL + endpoint);
   return await response.json();
-}
+};
 
-function createElement(character) {
+const createElement = (character) => {
   const li = document.createElement('li');
   const div = document.createElement('div');
   const name = document.createElement('p');
@@ -35,14 +35,14 @@ function createElement(character) {
   li.appendChild(image);
 
   return li;
-} 
+};
 
-function render(element) {
+const render = (element) => {
   containerElement.innerHTML = "";
   containerElement.appendChild(element);
-}
+};
 
-function showCharacter(characters) {
+const showCharacter = (characters) => {
   const characterList = document.createElement('ul');
 
   characterList.className = 'character-list';
@@ -52,14 +52,14 @@ function showCharacter(characters) {
     characterList.appendChild(li);
   }
   render(characterList);
-}
+};
 
-function handleRadioChange(e) {
+const handleRadioChange = (e) => {
   const selectedValue = e.target.value;
   fetchKimetsuData(`${selectedValue}.json`).then(characters => {
     showCharacter(characters);
   });
-}
+};
 
 const containerElement = document.getElementById('content');
 const radioButtons = document.querySelectorAll('.radio');
