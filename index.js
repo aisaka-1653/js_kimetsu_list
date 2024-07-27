@@ -3,6 +3,9 @@
 const GITHUB_BASE_URL = 'https://ihatov08.github.io/';
 const API_BASE_URL = 'https://ihatov08.github.io/kimetsu_api/api/';
 
+const containerElement = document.getElementById('content');
+const radioButtons = document.querySelectorAll('.radio');
+
 const createLoadingElement = () => {
   const loadingElement = document.createElement('p')
   loadingElement.textContent = 'loading...';
@@ -54,18 +57,11 @@ const showCharacter = (characters) => {
 
 const handleRadioChange = (e) => {
   const selectedValue = e.target.value;
-  fetchKimetsuData(`${selectedValue}.json`).then(characters => {
-    showCharacter(characters);
-  });
+  fetchKimetsuData(`${selectedValue}.json`).then(showCharacter);
 };
-
-const containerElement = document.getElementById('content');
-const radioButtons = document.querySelectorAll('.radio');
 
 radioButtons.forEach(radio => {
   radio.addEventListener('change', handleRadioChange);
 });
 
-fetchKimetsuData('all.json').then(characters => {
-  showCharacter(characters);
-});
+fetchKimetsuData('all.json').then(showCharacter);
