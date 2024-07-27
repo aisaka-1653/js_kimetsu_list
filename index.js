@@ -9,31 +9,34 @@ const createLoadingElement = () => {
   return loadingElement;
 };
 
-const fetchKimetsuData = async (endpoint) => {
-  render(createLoadingElement());
-  const response = await fetch(API_BASE_URL + endpoint);
-  return await response.json();
+const createErrorElement = (message) => {
+  const errorElement = document.createElement('p');
+  errorElement.textContent = `エラー: ${message}`;
+  errorElement.style.color = 'red';
+  return errorElement;
 };
 
-const createElement = (character) => {
+const fetchKimetsuData = async (endpoint) => {
+  try {
+    render(createLoadingElement());
+    const response = await fetch(API_BASE_URL + endpoint);
+    if (!response.ok) throw new Error('サーバーエラー');
+    return await response.json();
+  } catch (error) {
+    console.error(error.message);
+    render(createErrorElement(error.message));
+  }
+};
+
+const createCharacterElement = ({ name, image, category }) => {
   const li = document.createElement('li');
-  const div = document.createElement('div');
-  const name = document.createElement('p');
-  const image = document.createElement('img');
-  const category = document.createElement('p');
-
-  name.textContent = character.name;
-  image.src = GITHUB_BASE_URL + character.image;
-  category.textContent = `[${character.category}]`;
-    
-  div.className = 'character-card';
-  image.className = 'character-img';
-
-  div.appendChild(category);
-  div.appendChild(name);
-  li.appendChild(div);
-  li.appendChild(image);
-
+  li.innerHTML = `
+    <div class="character-card">
+      <p>[${category}]</p>
+      <p>${name}</p>
+    </div>
+    <img src="${GITHUB_BASE_URL}${image}" class="character-img" alt="${name}">
+  `;
   return li;
 };
 
@@ -46,7 +49,7 @@ const showCharacter = (characters) => {
   const characterList = document.createElement('ul');
 
   characterList.className = 'character-list';
-  const liElements = characters.map(createElement);
+  const liElements = characters.map(createCharacterElement);
 
   for (let li of liElements) {
     characterList.appendChild(li);
