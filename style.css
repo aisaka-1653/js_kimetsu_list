@@ -1,0 +1,28 @@
+.container {
+  margin-inline: auto;
+  width: 1200px;
+}
+
+.radio-label {
+  margin-inline-end: 1rem;
+}
+
+.character-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.character-list li {
+  list-style: none;
+}
+
+.character-card {
+  display: flex;
+  gap: 1rem;
+}
+
+.character-img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
